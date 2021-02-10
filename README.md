@@ -13,18 +13,20 @@ digitally.
 - However, erasing notes is quite difficult.
 
 *Digital*
-- 
-
-At the same time, I have found that digital music sheet applications 
-are often expensive or are tedious to use. I am hoping to create a 
-music sheet application that will be easier to use. 
+- Storing and sharing music becomes easier. 
+- You can easily edit mistakes 
+- However, these applications are often expensive or are tedious to use. 
+  
+For this project, I hope to create a music sheet application that will be easier to use. 
 
 
 ## User Stories: 
 
-- item 1
-- item 2
-- item 3
+- As a user, I would like to *add notes* to my music sheet
+- As a user, I would like to *remove a note* from my music sheet
+- As a user, I would like to select the note and play that note
+- As a user, I would like to store multiple  my music sheet 
+- As a user, I would like to *view* my music sheet 
 
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.
+
+
