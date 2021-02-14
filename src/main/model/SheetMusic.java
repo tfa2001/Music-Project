@@ -2,21 +2,18 @@ package model;
 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SheetMusic {
     private Notes note;
     private String letter;
-    private ArrayList<String> letters;
 
-    private SheetMusic score;
     private ArrayList<Notes> sheet;
-    private Scanner input; //Teller App
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic() {
         this.sheet = new ArrayList<>();
         this.note = new Notes(letter);
+        letter = note.getNoteName();
 
     }
 
@@ -27,8 +24,7 @@ public class SheetMusic {
     public void addNote(Notes note) {
         this.note = note;
         sheet.add(note);
-        letter = note.getNoteName();
-        System.out.println(letter + " is added!");
+        System.out.println(note.getNoteName() + " is added!");
     }
 
     /* MODIFIES: this
@@ -37,24 +33,35 @@ public class SheetMusic {
      */
     public void removeNote(Notes note) {
         if (sheet.contains(note)) {
+            this.note = note;
             sheet.remove(note);
-            letter = note.getNoteName();
-            System.out.println(letter + " is removed.");
+            System.out.println(note.getNoteName() + " is removed.");
         } else {
-            System.out.println(letter + "does not exist in the Music Sheet.");
+            System.out.println("There is no note " + note.getNoteName() + " in Music Sheet.");
         }
+    }
+
+    /* MODIFIES: this
+     * EFFECTS: Removes all the notes
+     */
+    public void removeAllNotes() {
+        sheet.removeAll(sheet);
+        System.out.println("All notes have been removed.");
+        System.out.println("Music Sheet is now Empty!");
     }
 
     /* EFFECTS: View my music sheet
      */
-    public ArrayList<String> viewMusicSheet() {
-        letters = new ArrayList<>();
-        for (Notes note: sheet) {
-            letter = note.getNoteName();
-            letters.add(letter);
+    public Boolean viewMusicSheet() {
+        if (getNoteListSize() != 0) {
+            System.out.println("Here is your Music Sheet!");
+            return true;
+        } else {
+            System.out.println("Sorry, the Music Sheet is Empty.");
+            return false;
         }
-        return letters;
     }
+
 
     /* EFFECTS: Saves notes to music sheet
      */
@@ -63,7 +70,7 @@ public class SheetMusic {
         return title + " is saved!";
     }
 
-
+    // getter
     public Integer getNoteListSize() {
         return sheet.size();
     }

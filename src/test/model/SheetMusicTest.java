@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class SheetMusicTest {
@@ -31,17 +31,27 @@ class SheetMusicTest {
     @Test
     public void testRemoveNote() {
         note1 = new Notes("A");
+        note2 = new Notes("C");
         score.addNote(note1);
         score.removeNote(note1);
         assertEquals(0, score.getNoteListSize());
         score.addNote(note1);
         score.addNote(note1);
-        score.addNote(note1);
         score.removeNote(note1);
-        assertEquals(2, score.getNoteListSize());
-        note2 = new Notes("B");
+        assertEquals(1, score.getNoteListSize());
         score.removeNote(note2);
-        assertEquals(2, score.getNoteListSize());
+        assertEquals(1, score.getNoteListSize());
+    }
+
+    @Test
+    public void testRemoveAllNotes() {
+        note1 = new Notes("A");
+        note2 = new Notes("B");
+        score.addNote(note1);
+        score.addNote(note2);
+        score.addNote(note1);
+        score.removeAllNotes();
+        assertEquals(0, score.getNoteListSize());
     }
 
     @Test
@@ -51,7 +61,9 @@ class SheetMusicTest {
         score.addNote(note1);
         score.addNote(note2);
         score.addNote(note1);
-        assertEquals(score, score.viewMusicSheet());
+        assertTrue(score.viewMusicSheet());
+        score.removeAllNotes();
+        assertFalse(score.viewMusicSheet());
     }
 
     @Test

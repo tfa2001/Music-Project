@@ -13,6 +13,7 @@ public class Notes {
     }
 
     // REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G"
+    // getter
     public String getNoteName() {
         return letter;
     }
