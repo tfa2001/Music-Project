@@ -24,8 +24,8 @@ For this project, I hope to create a music sheet application that will be easier
 
 - As a user, I would like to *add notes* to my music sheet
 - As a user, I would like to *remove a note* from my music sheet
-- As a user, I would like to view a list of the titles I gave for my music sheet. 
-- As a user, I would like to save my music sheet 
+- As a user, I would like to view all the notes in my music sheet
+- As a user, I would like to save all the notes in my music sheet
 
 
 

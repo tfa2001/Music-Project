@@ -2,21 +2,23 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.MusicSheet;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class MusicSheetTest {
+class SheetMusicTest {
     private Notes note;
     private ArrayList<Notes> sheet;
-    private MusicSheet score; // score as in Musical Score
+
+    private SheetMusic score; // score as in Musical Score
+    private SheetMusic score1;
+    private SheetMusic score2;
 
     @BeforeEach
     public void setup() {
-        score = new MusicSheet("Sheet 1");
+        score = new SheetMusic("Sheet 1");
         sheet = new ArrayList<>();
     }
 
@@ -24,26 +26,16 @@ class MusicSheetTest {
     @Test
     public void testAddNote() {
         note = new Notes("A", "quarter");
-        score.addNote(note);
+        score.addNote(note, sheet);
         assertEquals(1, sheet.size());
     }
 
     @Test
     public void testRemoveNote() {
         note = new Notes("A", "quarter");
-        score.addNote(note);
+        score.addNote(note, sheet);
         score.removeNote(note);
         assertEquals(0, sheet.size());
-    }
-
-    @Test
-    public void testSaveMusicSheet() {
-        assertEquals("Sheet 1 is saved!", score.saveMusicSheet("Sheet 1"));
-    }
-
-    @Test
-    public void testMusicSheetList() {
-
     }
 
 
