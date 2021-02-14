@@ -3,32 +3,29 @@ package model;
 public class Notes {
 
     private String letter;
-    private Integer noteNumber;
+    private String duration;
 
 
     /* REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G";
-     *           number of the note must be between A0 and C8
+     *           note duration must be "whole", "half", "quarter", or "eighth"
      * EFFECTS: letter note is set to noteName;
      *          number is set to NoteNumber;
      *
      */
-    public Notes(String noteName, Integer number) {
-        letter = noteName;
-        noteNumber = number;
+    public Notes(String noteName, String rhythm) {
+        this.letter = noteName;
+        this.duration = rhythm;
     }
 
     // REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G"
-    public String getLetterName() {
+    public String getNoteName() {
         return letter;
     }
 
-    // REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G"
-    //           number of the note must be between A0 and C8
-
-    public Integer getNoteNumber() {
-        return null;
+    // REQUIRES: note duration must be "whole", "half", "quarter", or "eighth"
+    public String getNoteRhythm() {
+        return duration;
     }
-
 
 
 }
