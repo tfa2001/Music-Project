@@ -3,40 +3,64 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class SheetMusicTest {
-    private Notes note;
-    private ArrayList<Notes> sheet;
+    private Notes note1;
+    private Notes note2;
 
     private SheetMusic score; // score as in Musical Score
-    private SheetMusic score1;
-    private SheetMusic score2;
 
     @BeforeEach
     public void setup() {
-        score = new SheetMusic("Sheet 1");
-        sheet = new ArrayList<>();
+        score = new SheetMusic();
     }
 
 
     @Test
     public void testAddNote() {
-        note = new Notes("A", "quarter");
-        score.addNote(note, sheet);
-        assertEquals(1, sheet.size());
+        note1 = new Notes("A");
+        score.addNote(note1);
+        assertEquals(1, score.getNoteListSize());
+        score.addNote(note1);
+        score.addNote(note1);
+        assertEquals(3, score.getNoteListSize());
     }
 
     @Test
     public void testRemoveNote() {
-        note = new Notes("A", "quarter");
-        score.addNote(note, sheet);
-        score.removeNote(note);
-        assertEquals(0, sheet.size());
+        note1 = new Notes("A");
+        score.addNote(note1);
+        score.removeNote(note1);
+        assertEquals(0, score.getNoteListSize());
+        score.addNote(note1);
+        score.addNote(note1);
+        score.addNote(note1);
+        score.removeNote(note1);
+        assertEquals(2, score.getNoteListSize());
+        note2 = new Notes("B");
+        score.removeNote(note2);
+        assertEquals(2, score.getNoteListSize());
     }
 
+    @Test
+    public void testViewMusicSheet() {
+        note1 = new Notes("A");
+        note2 = new Notes("B");
+        score.addNote(note1);
+        score.addNote(note2);
+        score.addNote(note1);
+        assertEquals(score, score.viewMusicSheet());
+    }
 
+    @Test
+    public void testSaveMusicSheet() {
+        note1 = new Notes("A");
+        note2 = new Notes("B");
+        score.addNote(note1);
+        score.addNote(note2);
+        score.addNote(note1);
+        assertEquals("Sheet 1 is saved!", score.saveMusicSheet("Sheet 1"));
+    }
 }
