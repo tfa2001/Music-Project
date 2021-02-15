@@ -107,7 +107,7 @@ public class MusicSheetApp {
                 || noteName.equalsIgnoreCase("E")
                 || noteName.equalsIgnoreCase("F")
                 || noteName.equalsIgnoreCase("G")) {
-            score.removeNote(note);
+            score.removeNote(note, noteName);
         } else {
             System.out.println(noteName + " is not a note.");
         }

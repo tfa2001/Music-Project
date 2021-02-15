@@ -31,8 +31,10 @@ public class SheetMusic {
      * EFFECTS: If note is in music sheet, remove note from music sheet.
      *          Otherwise, do nothing
      */
-    public void removeNote(Notes note) {
-        if (sheet.contains(note)) {
+    public void removeNote(Notes note, String noteLetter) {
+        String letterOfNote = note.getNoteName();
+        Boolean isNoteThere = noteLetter.equals(letterOfNote);
+        if (isNoteThere) {
             this.note = note;
             sheet.remove(note);
             System.out.println(note.getNoteName() + " is removed.");

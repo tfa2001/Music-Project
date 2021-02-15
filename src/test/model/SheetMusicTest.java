@@ -33,13 +33,13 @@ class SheetMusicTest {
         note1 = new Notes("A");
         note2 = new Notes("C");
         score.addNote(note1);
-        score.removeNote(note1);
+        score.removeNote(note1, "A");
         assertEquals(0, score.getNoteListSize());
         score.addNote(note1);
         score.addNote(note1);
-        score.removeNote(note1);
+        score.removeNote(note1, "A");
         assertEquals(1, score.getNoteListSize());
-        score.removeNote(note2);
+        score.removeNote(note2, "B");
         assertEquals(1, score.getNoteListSize());
     }
 
