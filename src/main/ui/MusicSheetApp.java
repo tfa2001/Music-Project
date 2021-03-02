@@ -99,7 +99,6 @@ public class MusicSheetApp {
         System.out.print("Enter the letter of the note that you would like to remove:");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
-        note = new Notes(noteName);
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
@@ -107,7 +106,7 @@ public class MusicSheetApp {
                 || noteName.equalsIgnoreCase("E")
                 || noteName.equalsIgnoreCase("F")
                 || noteName.equalsIgnoreCase("G")) {
-            score.removeNote(note, noteName);
+            score.removeNote(noteName);
         } else {
             System.out.println(noteName + " is not a note.");
         }

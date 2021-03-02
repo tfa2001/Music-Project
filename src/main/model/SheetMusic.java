@@ -4,7 +4,7 @@ package model;
 import java.util.ArrayList;
 
 public class SheetMusic {
-    private Notes note;
+    private Notes notes;
     private String letter;
 
     private ArrayList<Notes> sheet;
@@ -12,8 +12,8 @@ public class SheetMusic {
     // EFFECTS: Constructs a music sheet
     public SheetMusic() {
         this.sheet = new ArrayList<>();
-        this.note = new Notes(letter);
-        letter = note.getNoteName();
+        this.notes = new Notes(letter);
+        letter = notes.getNoteName();
 
     }
 
@@ -21,35 +21,38 @@ public class SheetMusic {
     /* MODIFIES: this
      * EFFECTS: Add note to music sheet.
      */
-    public void addNote(Notes note) {
-        this.note = note;
-        sheet.add(note);
+    public Boolean addNote(Notes note) {
+        this.notes = new Notes(letter);
+        this.notes = note;
         System.out.println(note.getNoteName() + " is added!");
+        return sheet.add(notes);
     }
 
     /* MODIFIES: this
      * EFFECTS: If note is in music sheet, remove note from music sheet.
      *          Otherwise, do nothing
      */
-    public void removeNote(Notes note, String noteLetter) {
-        String letterOfNote = note.getNoteName();
-        Boolean isNoteThere = noteLetter.equals(letterOfNote);
-        if (isNoteThere) {
-            this.note = note;
-            sheet.remove(note);
-            System.out.println(note.getNoteName() + " is removed.");
-        } else {
-            System.out.println("There is no note " + note.getNoteName() + " in Music Sheet.");
+    public Boolean removeNote(String noteLetter) {
+        this.letter = noteLetter;
+        for (Notes note: sheet) {
+            String letterOfNote = note.getNoteName();
+            Boolean isNoteThere = letterOfNote.equalsIgnoreCase(noteLetter);
+            if (isNoteThere) {
+                System.out.println(note.getNoteName() + " is removed.");
+                return sheet.remove(note);
+            }
         }
+        System.out.println("There is no note " + noteLetter + " in Music Sheet.");
+        return false;
     }
 
     /* MODIFIES: this
      * EFFECTS: Removes all the notes
      */
-    public void removeAllNotes() {
-        sheet.removeAll(sheet);
+    public Boolean removeAllNotes() {
         System.out.println("All notes have been removed.");
         System.out.println("Music Sheet is now Empty!");
+        return sheet.removeAll(sheet);
     }
 
     /* EFFECTS: View my music sheet
@@ -57,6 +60,7 @@ public class SheetMusic {
     public Boolean viewMusicSheet() {
         if (getNoteListSize() != 0) {
             System.out.println("Here is your Music Sheet!");
+            System.out.println(sheet.toString());
             return true;
         } else {
             System.out.println("Sorry, the Music Sheet is Empty.");
