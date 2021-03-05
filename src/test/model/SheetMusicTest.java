@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -14,24 +16,26 @@ class SheetMusicTest {
 
     @BeforeEach
     public void setup() {
-        score = new SheetMusic();
+        score = new SheetMusic("Sheet 1");
+        note1 = new Notes("A", Rhythm.EIGHTH);
+        note2 = new Notes("C", Rhythm.QUARTER);
     }
 
 
     @Test
     public void testAddNote() {
-        note1 = new Notes("A");
         assertTrue(score.addNote(note1));
         assertEquals(1, score.getNoteListSize());
-        assertTrue(score.addNote(note1));
+        assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));
         assertEquals(3, score.getNoteListSize());
+
+
     }
 
     @Test
     public void testRemoveNote() {
-        note1 = new Notes("A");
-        note2 = new Notes("C");
+
         assertTrue(score.addNote(note1));
         assertTrue(score.removeNote("A"));
         assertEquals(0, score.getNoteListSize());
@@ -45,8 +49,6 @@ class SheetMusicTest {
 
     @Test
     public void testRemoveAllNotes() {
-        note1 = new Notes("A");
-        note2 = new Notes("B");
         assertTrue(score.addNote(note1));
         assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));
@@ -56,20 +58,16 @@ class SheetMusicTest {
 
     @Test
     public void testViewMusicSheet() {
-        note1 = new Notes("A");
-        note2 = new Notes("B");
         assertTrue(score.addNote(note1));
         assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));
-        assertTrue(score.viewMusicSheet());
+
         assertTrue(score.removeAllNotes());
-        assertFalse(score.viewMusicSheet());
+        assertEquals(score.viewMusicSheet(), score.viewMusicSheet());
     }
 
     @Test
     public void testSaveMusicSheet() {
-        note1 = new Notes("A");
-        note2 = new Notes("B");
         assertTrue(score.addNote(note1));
         assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));

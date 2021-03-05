@@ -28,6 +28,8 @@ For this project, I hope to create a music sheet application that will be easier
   in the music sheet
 - As a user, I would like to view all the notes in my music sheet
 - As a user, I would like to save all the notes in my music sheet
+  
+
 - As a user, if I quit my program, I would like to be asked if I 
   would like to save my changes. 
 - As a user, when I start my program, I would like to be asked if 
