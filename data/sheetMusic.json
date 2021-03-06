@@ -1,8 +1,4 @@
 {
-    "notes": [
-        {"name": "a"},
-        {"name": "b"},
-        {"name": "c"}
-    ],
-    "title": "hello"
+    "notes": [{"noteName": "b"}],
+    "title": "hi"
 }

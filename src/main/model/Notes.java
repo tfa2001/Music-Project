@@ -26,7 +26,7 @@ public class Notes implements Writable {
     // Code based on Json Demo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("name", letter);
+        json.put("noteName", letter);
         return json;
     }
 }
