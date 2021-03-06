@@ -21,13 +21,16 @@ public class JsonReader {
         this.file = file;
     }
 
+    // EFFECTS: reads sheet music from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    // Code based on JsonReader Demo
     public SheetMusic read() throws IOException {
         String jsonData = readFile(file);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseSheetMusic(jsonObject);
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses sheet music from JSON object and returns it
     // Code based on JsonReader Demo
     private SheetMusic parseSheetMusic(JSONObject jsonObject) {
         String name = jsonObject.getString("title");
@@ -61,7 +64,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: sm
     // EFFECTS: parses note from JSON object and adds it to sheet music
     // Code based on JsonReader Demo
     private void addNote(SheetMusic sm, JSONObject jsonObject) {
@@ -69,6 +72,8 @@ public class JsonReader {
         Notes note = new Notes(name);
         sm.addNote(note);
     }
+
+
 
 
 }

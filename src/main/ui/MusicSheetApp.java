@@ -16,6 +16,7 @@ public class MusicSheetApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+
     private Scanner input; //Teller App
 
     // EFFECTS: Constructs a music sheet and runs the application
@@ -82,10 +83,11 @@ public class MusicSheetApp {
     }
 
     // Code based on JSON demo
+    // EFFECTS: loads sheet music from file
     private void doLoadMusicSheet() {
         try {
             score = jsonReader.read();
-            System.out.println("Loaded " + score.getSheetMusicName() + " from" + JSON_STORE);
+            System.out.println("Loaded " + score.getSheetMusicName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read file from: " + JSON_STORE);
         }
@@ -147,16 +149,14 @@ public class MusicSheetApp {
     private void doSaveMusicSheet() {
         System.out.println("What would you like to name your Music Sheet?");
         String title = input.next();
+        score.saveMusicSheet(title);
         try {
             jsonWriter.open();
             jsonWriter.write(score);
             jsonWriter.close();
-            score.saveMusicSheet(title);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
-
-
     }
 
 }

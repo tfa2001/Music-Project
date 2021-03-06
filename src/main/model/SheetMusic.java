@@ -76,8 +76,8 @@ public class SheetMusic implements Writable {
     /* EFFECTS: Saves notes to music sheet
      */
     public String saveMusicSheet(String title) {
-        System.out.println(title + " is saved!");
         setMusicSheetName(title);
+        System.out.println(title + " is saved!");
         return title + " is saved!";
     }
 

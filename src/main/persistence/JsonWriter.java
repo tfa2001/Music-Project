@@ -27,7 +27,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of sheet music to file
     // Code based on JsonWriter demo
     public void write(SheetMusic sm) {
         JSONObject json = sm.toJson();
