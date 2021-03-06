@@ -1,7 +1,6 @@
 package persistence;
 
 import model.Notes;
-import model.Rhythm;
 import model.SheetMusic;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,8 +66,7 @@ public class JsonReader {
     // Code based on JsonReader Demo
     private void addNote(SheetMusic sm, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
-        Rhythm rhythm = Rhythm.valueOf(jsonObject.getString("rhythm"));
-        Notes note = new Notes(name, rhythm);
+        Notes note = new Notes(name);
         sm.addNote(note);
     }
 

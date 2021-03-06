@@ -6,14 +6,15 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SheetMusic implements Writable {
     private Notes notes;
     private String letter;
     private String scoreName;
-    private Rhythm rhythm;
 
-    private ArrayList<Notes> sheet;
+    private List<Notes> sheet;
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic(String title) {
@@ -27,9 +28,9 @@ public class SheetMusic implements Writable {
      */
     public Boolean addNote(Notes note) {
         this.notes = note;
-        this.rhythm = note.getRhythm();
-        this.notes = new Notes(letter, rhythm);
-        System.out.println(note.getNoteName() + " is added!");
+        this.letter = notes.getNoteName();
+        notes = new Notes(letter);
+        System.out.println(letter + " is added!");
         return sheet.add(notes);
     }
 
@@ -41,7 +42,7 @@ public class SheetMusic implements Writable {
         this.letter = noteLetter;
         for (Notes note : sheet) {
             String letterOfNote = note.getNoteName();
-            Boolean isNoteThere = letterOfNote.equalsIgnoreCase(noteLetter);
+            Boolean isNoteThere = noteLetter.equalsIgnoreCase(letterOfNote);
             if (isNoteThere) {
                 System.out.println(note.getNoteName() + " is removed.");
                 return sheet.remove(note);
@@ -62,18 +63,15 @@ public class SheetMusic implements Writable {
 
     /* EFFECTS: View my music sheet
      */
-    public ArrayList<Notes> viewMusicSheet() {
-        if (getNoteListSize() != 0) {
-            System.out.println("Here is your Music Sheet!");
-            for (Notes n: sheet) {
-                String name = n.getNoteName();
-                System.out.println(name);
-            }
-        } else {
-            System.out.println("Sorry, the Music Sheet is Empty.");
+    public List<Notes> viewMusicSheet() {
+        System.out.println("Here is your Music Sheet!");
+        for (Notes n : sheet) {
+            String name = n.getNoteName();
+            System.out.println(name);
         }
-        return sheet;
+        return Collections.unmodifiableList(sheet);
     }
+
 
     /* EFFECTS: Saves notes to music sheet
      */
@@ -115,7 +113,6 @@ public class SheetMusic implements Writable {
         }
         return jsonArray;
     }
-
 
 
 }

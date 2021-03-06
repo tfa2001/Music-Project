@@ -6,15 +6,15 @@ import persistence.Writable;
 public class Notes implements Writable {
 
     private String letter;
-    private Rhythm rhythm;
+//    private Rhythm rhythm;
 
 
     /* REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G";
      * EFFECTS: letter note is set to noteName;
      */
-    public Notes(String noteName, Rhythm rhythm) {
+    public Notes(String noteName) {
         this.letter = noteName;
-        this.rhythm = rhythm;
+//        this.rhythm = rhythm;
     }
 
     // REQUIRES: letter must be one of "A", "B", "C", "D", "E", "F", or "G"
@@ -24,16 +24,16 @@ public class Notes implements Writable {
     }
 
     // getter
-    public Rhythm getRhythm() {
-        return rhythm;
-    }
+//    public Rhythm getRhythm() {
+//        return rhythm;
+//    }
 
     @Override
     // Code based on Json Demo
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", letter);
-        json.put("rhythm", rhythm);
+//        json.put("rhythm", rhythm);
         return json;
     }
 }

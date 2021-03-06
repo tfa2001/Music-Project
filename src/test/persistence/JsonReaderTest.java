@@ -43,7 +43,7 @@ public class JsonReaderTest extends JsonTest{
         JsonReader reader = new JsonReader("./data/testReaderGeneralSheetMusic.json");
         try {
             SheetMusic sm = reader.read();
-            ArrayList<Notes> notes = sm.viewMusicSheet();
+            List<Notes> notes = sm.viewMusicSheet();
             assertEquals("My sheet music", sm.getSheetMusicName());
             assertEquals(3, notes.size());
             checkNote("a", notes.get(0));

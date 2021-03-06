@@ -1,12 +1,12 @@
 package persistence;
 
 import model.Notes;
-import model.Rhythm;
 import model.SheetMusic;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -50,9 +50,9 @@ public class JsonWriterTest extends JsonTest {
     public void testWriterGeneralSheetMusic() {
         try {
             SheetMusic sm = new SheetMusic("My sheet music");
-            sm.addNote(new Notes("a", Rhythm.EIGHTH));
-            sm.addNote(new Notes("b", Rhythm.QUARTER));
-            sm.addNote(new Notes("a", Rhythm.WHOLE));
+            sm.addNote(new Notes("a"));
+            sm.addNote(new Notes("b"));
+            sm.addNote(new Notes("a"));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralSheetMusic.json");
             writer.open();
             writer.write(sm);
@@ -61,7 +61,7 @@ public class JsonWriterTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterGeneralSheetMusic.json");
             sm = reader.read();
             assertEquals("My sheet music", sm.getSheetMusicName());
-            ArrayList<Notes> notes = sm.viewMusicSheet();
+            List<Notes> notes = sm.viewMusicSheet();
             assertEquals(3, notes.size());
             checkNote("a", notes.get(0));
             checkNote("b", notes.get(1));

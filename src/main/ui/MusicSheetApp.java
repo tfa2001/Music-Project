@@ -1,7 +1,6 @@
 package ui;
 
 import model.Notes;
-import model.Rhythm;
 import model.SheetMusic;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -14,7 +13,6 @@ public class MusicSheetApp {
     private static final String JSON_STORE = "./data/sheetMusic.json";
     private Notes note;
     private SheetMusic score;
-    private Rhythm rhythm;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -99,7 +97,7 @@ public class MusicSheetApp {
         System.out.print("Enter the letter of the note that you would like to add: ");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
-        note = new Notes(noteName, rhythm);
+        note = new Notes(noteName);
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
