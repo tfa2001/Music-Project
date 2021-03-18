@@ -1,4 +1,6 @@
-package model;
+package ui.drawing;
+
+import ui.drawing.NoteShape;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -52,11 +52,6 @@ public class SheetMusic implements Writable {
         return false;
     }
 
-    //EFFECTS: Gets all the notes in the note list
-    public List<Notes> getNotes() {
-        return Collections.unmodifiableList(sheet);
-    }
-
     /* MODIFIES: this
      * EFFECTS: Removes all the notes
      */

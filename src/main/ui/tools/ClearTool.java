@@ -1,12 +1,11 @@
 package ui.tools;
 
-import model.SheetMusicDrawing;
+import ui.drawing.SheetMusicDrawing;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 
 public class ClearTool extends Tool {
 

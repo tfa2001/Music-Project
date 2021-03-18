@@ -1,8 +1,8 @@
 package ui;
 
-import model.NoteShape;
 import model.SheetMusic;
-import model.SheetMusicDrawing;
+import ui.drawing.NoteShape;
+import ui.drawing.SheetMusicDrawing;
 import ui.tools.AddNoteTool;
 import ui.tools.ClearTool;
 import ui.tools.RemoveTool;

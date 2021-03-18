@@ -1,6 +1,6 @@
 package ui.tools;
 
-import model.NoteShape;
+import ui.drawing.NoteShape;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
