@@ -56,7 +56,7 @@ class SheetMusicTest {
         assertTrue(score.addNote(note1));
         assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));
-        assertTrue(score.removeAllNotes());
+        score.removeAllNotes();
         assertEquals(0, score.getNoteListSize());
     }
 
@@ -73,7 +73,7 @@ class SheetMusicTest {
         expected.add(0, new Notes("A"));
 //      assertEquals(expected, sheetMusic);
 
-        assertTrue(score.removeAllNotes());
+        score.removeAllNotes();
         expected.clear();
         assertEquals(expected, sheetMusic);
     }

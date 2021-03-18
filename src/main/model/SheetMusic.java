@@ -10,11 +10,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class SheetMusic implements Writable {
+
     private Notes notes;
     private String letter;
     private String scoreName;
 
-    private List<Notes> sheet;
+    private final List<Notes> sheet;
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic(String title) {
@@ -30,7 +31,6 @@ public class SheetMusic implements Writable {
         this.notes = note;
         this.letter = notes.getNoteName();
         notes = new Notes(letter);
-        System.out.println(letter + " is added!");
         return sheet.add(notes);
     }
 
@@ -52,13 +52,18 @@ public class SheetMusic implements Writable {
         return false;
     }
 
+    //EFFECTS: Gets all the notes in the note list
+    public List<Notes> getNotes() {
+        return Collections.unmodifiableList(sheet);
+    }
+
     /* MODIFIES: this
      * EFFECTS: Removes all the notes
      */
-    public Boolean removeAllNotes() {
+    public void removeAllNotes() {
         System.out.println("All notes have been removed.");
         System.out.println("Music Sheet is now Empty!");
-        return sheet.removeAll(sheet);
+        sheet.clear();
     }
 
     /* EFFECTS: View my music sheet
