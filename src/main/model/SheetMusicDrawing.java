@@ -26,16 +26,10 @@ public class SheetMusicDrawing extends JPanel {
         }
     }
 
-    // EFFECTS: return true if the given Shape s is contained in Drawing
-    public boolean containsShape(NoteShape ns) {
-        return notes.contains(ns);
-    }
-
     // EFFECTS: paints grid, playback line, and all figures in drawing
     //          Note to students: calls to repaint gets here via the Java graphics framework
     //
     // Note: part of the code based from stackoverflow: https://stackoverflow.com/questions/4533526/
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
