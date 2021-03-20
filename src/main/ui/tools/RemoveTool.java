@@ -1,6 +1,6 @@
 package ui.tools;
 
-import ui.drawing.NoteShape;
+import model.Notes;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class RemoveTool extends Tool {
 
-    private NoteShape shapeToDelete;
+    private Notes shapeToDelete;
 
     public RemoveTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);

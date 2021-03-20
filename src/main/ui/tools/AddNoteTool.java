@@ -1,6 +1,6 @@
 package ui.tools;
 
-import ui.drawing.NoteShape;
+import model.Notes;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
@@ -10,9 +10,10 @@ import java.awt.event.MouseEvent;
 
 //TODO: Code based on SimpleDrawingPlayer
 public class AddNoteTool extends Tool {
-    private final int width = 50;
-    private final int height = 30;
-    private NoteShape note;
+    private final int width = 40;
+    private final int height = 25;
+    private Notes note;
+    private String name;
 
     public AddNoteTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
@@ -47,7 +48,7 @@ public class AddNoteTool extends Tool {
 
     //EFFECTS: Constructs and returns the new shape
     private void makeShape(MouseEvent e) {
-        note = new NoteShape(e.getPoint(), width, height);
+        note = new Notes(e.getPoint(), width, height);
     }
 
     private class AddToolClickHandler implements ActionListener {

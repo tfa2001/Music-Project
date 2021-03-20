@@ -1,8 +1,7 @@
 package ui;
 
+import model.Notes;
 import model.SheetMusic;
-import ui.drawing.NoteShape;
-import ui.drawing.SheetMusicDrawing;
 import ui.tools.AddNoteTool;
 import ui.tools.ClearTool;
 import ui.tools.RemoveTool;
@@ -23,8 +22,7 @@ public class MusicSheetEditor extends JFrame {
 
     private List<Tool> tools;
     private Tool tool;
-    private SheetMusic sheetMusic;
-    private SheetMusicDrawing currDrawing;
+    private SheetMusic currDrawing;
 
     public static void main(String[] args) {
         new MusicSheetEditor();
@@ -50,7 +48,6 @@ public class MusicSheetEditor extends JFrame {
     private void initializeFields() {
         tools = new ArrayList<>();
         tool = null;
-        this.sheetMusic = new SheetMusic("Music Sheet");
     }
 
     private void initializeFrame() {
@@ -64,7 +61,7 @@ public class MusicSheetEditor extends JFrame {
     }
 
     private void addNewDrawing() {
-        SheetMusicDrawing newDrawing = new SheetMusicDrawing();
+        SheetMusic newDrawing = new SheetMusic("Music Sheet");
         currDrawing = newDrawing;
         add(newDrawing, BorderLayout.CENTER);
         validate();
@@ -106,8 +103,8 @@ public class MusicSheetEditor extends JFrame {
 
     // MODIFIES: this
     // EFFECTS:  adds given Shape to currentDrawing
-    public void addToDrawing(NoteShape f) {
-        currDrawing.addShape(f);
+    public void addToDrawing(Notes f) {
+        currDrawing.addNote(f);
     }
 
     // EFFECTS: Makes a MenuBar where you can save, open, and quit program
@@ -127,20 +124,20 @@ public class MusicSheetEditor extends JFrame {
     }
 
     // EFFECTS: return notes at given point at the currentDrawing
-    public NoteShape getShapeInDrawing(Point point) {
+    public Notes getShapeInDrawing(Point point) {
         return currDrawing.getShapesAtPoint(point);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes note from currentDrawing
-    public void removeFromDrawing(NoteShape f) {
-        currDrawing.removeShape(f);
+    public void removeFromDrawing(Notes f) {
+        currDrawing.removeNote(f);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes given Shape from currentDrawing
     public void clearNotesFromDrawing() {
-        currDrawing.clearShapes();
+        currDrawing.removeAllNotes();
     }
 
 

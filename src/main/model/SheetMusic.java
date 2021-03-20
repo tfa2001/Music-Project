@@ -5,22 +5,37 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SheetMusic implements Writable {
+public class SheetMusic extends JPanel implements Writable {
 
     private Notes notes;
     private String letter;
     private String scoreName;
 
-    private final List<Notes> sheet;
+    private List<Notes> sheet;
+
+    private Image img;
+    private final int width = 1400;
+    private final int height = 375;
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic(String title) {
+        super();
         this.scoreName = title;
         this.sheet = new ArrayList<>();
+        try {
+            img = ImageIO.read(new File("./data/newMusicStaff.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -30,45 +45,30 @@ public class SheetMusic implements Writable {
     public Boolean addNote(Notes note) {
         this.notes = note;
         this.letter = notes.getNoteName();
-        notes = new Notes(letter);
-        return sheet.add(notes);
+        repaint();
+        return sheet.add(note);
     }
 
     /* MODIFIES: this
      * EFFECTS: If note is in music sheet, remove note from music sheet.
      *          Otherwise, do nothing
      */
-    public Boolean removeNote(String noteLetter) {
-        this.letter = noteLetter;
-        for (Notes note : sheet) {
-            String letterOfNote = note.getNoteName();
-            Boolean isNoteThere = noteLetter.equalsIgnoreCase(letterOfNote);
-            if (isNoteThere) {
-                System.out.println(note.getNoteName() + " is removed.");
-                return sheet.remove(note);
-            }
-        }
-        System.out.println("There is no note " + noteLetter + " in Music Sheet.");
-        return false;
+    public void removeNote(Notes n) {
+        sheet.remove(n);
+        repaint();
     }
 
     /* MODIFIES: this
      * EFFECTS: Removes all the notes
      */
     public void removeAllNotes() {
-        System.out.println("All notes have been removed.");
-        System.out.println("Music Sheet is now Empty!");
         sheet.clear();
+        repaint();
     }
 
     /* EFFECTS: View my music sheet
      */
     public List<Notes> viewMusicSheet() {
-        System.out.println("Here is your Music Sheet!");
-        for (Notes n : sheet) {
-            String name = n.getNoteName();
-            System.out.println(name);
-        }
         return Collections.unmodifiableList(sheet);
     }
 
@@ -96,6 +96,31 @@ public class SheetMusic implements Writable {
         this.scoreName = name;
     }
 
+    // EFFECTS: paints grid, playback line, and all figures in drawing
+    //          Note to students: calls to repaint gets here via the Java graphics framework
+    //
+    // Note: part of the code based from stackoverflow: https://stackoverflow.com/questions/4533526/
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int x1 = (this.getWidth() - width) / 2;
+        g.drawImage(img, x1, 0, width, height, this);
+        for (Notes note : sheet) {
+            note.draw(g);
+        }
+    }
+
+    // EFFECTS: returns the Shape at a given Point in Drawing, if any
+    public Notes getShapesAtPoint(Point point) {
+        for (Notes note : sheet) {
+            if (note.contains(point)) {
+                return note;
+            }
+
+        }
+        return null;
+    }
+
     @Override
     // Code based on JsonReader Demo
     public JSONObject toJson() {
@@ -113,6 +138,8 @@ public class SheetMusic implements Writable {
         }
         return jsonArray;
     }
+
+
 
 
 }

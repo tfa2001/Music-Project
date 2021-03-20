@@ -5,13 +5,14 @@ import model.SheetMusic;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class JsonWriterTest extends JsonTest {
+    private final int width = 40;
+    private final int height = 25;
 
     @Test
     // Based on Json Demo
@@ -50,9 +51,9 @@ public class JsonWriterTest extends JsonTest {
     public void testWriterGeneralSheetMusic() {
         try {
             SheetMusic sm = new SheetMusic("My sheet music");
-            sm.addNote(new Notes("a"));
-            sm.addNote(new Notes("b"));
-            sm.addNote(new Notes("a"));
+            sm.addNote(new Notes("a", width, height));
+            sm.addNote(new Notes("b", width, height));
+            sm.addNote(new Notes("a", width, height));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralSheetMusic.json");
             writer.open();
             writer.write(sm);

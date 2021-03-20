@@ -69,7 +69,7 @@ public class JsonReader {
     // Code based on JsonReader Demo
     private void addNote(SheetMusic sm, JSONObject jsonObject) {
         String name = jsonObject.getString("noteName");
-        Notes note = new Notes(name);
+        Notes note = new Notes(name, sm.getWidth(), sm.getHeight());
         sm.addNote(note);
     }
 
