@@ -4,6 +4,8 @@ import model.Notes;
 import model.SheetMusic;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.drawing.NoteShape;
+import ui.drawing.SheetMusicDrawing;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +16,8 @@ import java.util.stream.Stream;
 
 public class JsonReader {
     private String file;
+    private static final int width = 50;
+    private static final int height = 30;
 
     // EFFECTS: constructs reader from source file
     // Code based on JsonReader Demo
@@ -24,7 +28,7 @@ public class JsonReader {
     // EFFECTS: reads sheet music from file and returns it;
     // throws IOException if an error occurs reading data from file
     // Code based on JsonReader Demo
-    public SheetMusic read() throws IOException {
+    public SheetMusicDrawing read() throws IOException {
         String jsonData = readFile(file);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseSheetMusic(jsonObject);
@@ -32,9 +36,9 @@ public class JsonReader {
 
     // EFFECTS: parses sheet music from JSON object and returns it
     // Code based on JsonReader Demo
-    private SheetMusic parseSheetMusic(JSONObject jsonObject) {
+    private SheetMusicDrawing parseSheetMusic(JSONObject jsonObject) {
         String name = jsonObject.getString("title");
-        SheetMusic sm = new SheetMusic(name);
+        SheetMusicDrawing sm = new SheetMusicDrawing(name);
         addNotes(sm, jsonObject);
         return sm;
     }
@@ -56,7 +60,7 @@ public class JsonReader {
     // MODIFIES: sm
     // EFFECTS: parses notes from JSON object and adds them to sheet music
     // Code based on JsonReader Demo
-    private void addNotes(SheetMusic sm, JSONObject jsonObject) {
+    private void addNotes(SheetMusicDrawing sm, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("notes");
         for (Object json : jsonArray) {
             JSONObject nextNote = (JSONObject) json;
@@ -67,10 +71,11 @@ public class JsonReader {
     // MODIFIES: sm
     // EFFECTS: parses note from JSON object and adds it to sheet music
     // Code based on JsonReader Demo
-    private void addNote(SheetMusic sm, JSONObject jsonObject) {
-        String name = jsonObject.getString("noteName");
-        Notes note = new Notes(name);
-        sm.addNote(note);
+    private void addNote(SheetMusicDrawing sm, JSONObject jsonObject) {
+        int x1 = jsonObject.getInt("x-position");
+        int y1 = jsonObject.getInt("y-position");
+        NoteShape note = new NoteShape(x1, y1, width, height);
+        sm.addShape(note);
     }
 
 

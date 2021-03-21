@@ -2,6 +2,7 @@ package persistence;
 
 import model.SheetMusic;
 import org.json.JSONObject;
+import ui.drawing.SheetMusicDrawing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +30,7 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of sheet music to file
     // Code based on JsonWriter demo
-    public void write(SheetMusic sm) {
+    public void write(SheetMusicDrawing sm) {
         JSONObject json = sm.toJson();
         saveToFile(json.toString(TAB));
     }

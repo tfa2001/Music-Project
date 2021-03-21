@@ -1,14 +1,23 @@
 {
-    "notes": [
-        {
-            "name": "a"
-        },
-        {
-            "name": "b"
-        },
-        {
-            "name": "a"
-        }
-    ],
-    "title": "My sheet music"
+  "notes": [
+    {
+      "width": 50,
+      "x-position": 50,
+      "y-position": 20,
+      "height": 30
+    },
+    {
+      "width": 50,
+      "x-position": 10,
+      "y-position": 20,
+      "height": 30
+    },
+    {
+      "width": 50,
+      "x-position": 50,
+      "y-position": 10,
+      "height": 30
+    }
+  ],
+  "title": "My sheet music"
 }

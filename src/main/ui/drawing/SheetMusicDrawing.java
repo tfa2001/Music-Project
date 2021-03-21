@@ -1,5 +1,9 @@
 package ui.drawing;
 
+import model.Notes;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 import ui.drawing.NoteShape;
 
 import javax.imageio.ImageIO;
@@ -8,19 +12,22 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //TODO: Some code based on SimpleDrawingPlayer
-public class SheetMusicDrawing extends JPanel {
+public class SheetMusicDrawing extends JPanel implements Writable {
 
     private List<NoteShape> notes;
     private Image img;
     private final int width = 1400;
     private final int height = 375;
+    private String scoreName;
 
-    public SheetMusicDrawing() {
+    public SheetMusicDrawing(String title) {
         super();
         notes = new ArrayList<>();
+        this.scoreName = title;
         try {
             img = ImageIO.read(new File("./data/newMusicStaff.png"));
         } catch (IOException e) {
@@ -71,6 +78,40 @@ public class SheetMusicDrawing extends JPanel {
     public void clearShapes() {
         notes.clear();
         repaint();
+    }
+
+    // getter
+    public Integer getNoteListSize() {
+        return notes.size();
+    }
+
+    // getter
+    public String getSheetMusicName() {
+        return scoreName;
+    }
+
+    /* EFFECTS: View my music sheet
+     */
+    public List<NoteShape> viewMusicSheet() {
+        return Collections.unmodifiableList(notes);
+    }
+
+    @Override
+    // Code based on JsonReader Demo
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", scoreName);
+        json.put("notes", notesToJson());
+        return json;
+    }
+
+    // Code based on JsonReader Demo
+    private JSONArray notesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (NoteShape note : notes) {
+            jsonArray.put(note.toJson());
+        }
+        return jsonArray;
     }
 
 

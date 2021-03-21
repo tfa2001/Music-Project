@@ -2,24 +2,23 @@ package ui.drawing;
 
 
 import com.sun.javafx.geom.Shape;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.awt.*;
 
 //TODO: Some code based on Simple Drawing Player
-public class NoteShape {
+public class NoteShape implements Writable {
 
     private int x1;
     private int y1;
     private int width;
     private int height;
 
-    private int playLineCoord;
-
     public NoteShape(Point center, int w, int h) {
         this((int) center.getX(), (int) center.getY(), w, h);
         this.height = h;
         this.width = w;
-        playLineCoord = 0;
     }
 
     public NoteShape(int x, int y, int w, int h) {
@@ -37,12 +36,6 @@ public class NoteShape {
         fillGraphics(g);
         g.setColor(save);
         drawGraphics(g);
-
-        if (playLineCoord > 0 && playLineCoord < width) {
-            g.setColor(Color.red);
-            g.drawLine(x1 + playLineCoord, y1, x1 + playLineCoord, y1 + height);
-            g.setColor(save);
-        }
     }
 
     //EFFECTS: draws the shape
@@ -74,5 +67,33 @@ public class NoteShape {
         return containsX(pointx) && containsY(pointy);
     }
 
+
+    // getters
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getX1() {
+        return x1;
+    }
+
+    public int getY1() {
+        return y1;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("x-position", x1);
+        json.put("y-position", y1);
+        json.put("width", width);
+        json.put("height", height);
+        return json;
+    }
 }
 

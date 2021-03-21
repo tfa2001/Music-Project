@@ -3,6 +3,8 @@ package persistence;
 import model.Notes;
 import model.SheetMusic;
 import org.junit.jupiter.api.Test;
+import ui.drawing.NoteShape;
+import ui.drawing.SheetMusicDrawing;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class JsonReaderTest extends JsonTest{
     public void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            SheetMusic sm = reader.read();
+            SheetMusicDrawing sm = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -29,7 +31,7 @@ public class JsonReaderTest extends JsonTest{
     public void testReaderEmptySheetMusic() {
         JsonReader reader = new JsonReader("./data/testReaderEmptySheetMusic.json");
         try {
-            SheetMusic sm = reader.read();
+            SheetMusicDrawing sm = reader.read();
             assertEquals("My sheet music", sm.getSheetMusicName());
             assertEquals(0, sm.getNoteListSize());
         } catch (IOException e) {
@@ -42,13 +44,13 @@ public class JsonReaderTest extends JsonTest{
     public void testReaderGeneralSheetMusic() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralSheetMusic.json");
         try {
-            SheetMusic sm = reader.read();
-            List<Notes> notes = sm.viewMusicSheet();
+            SheetMusicDrawing sm = reader.read();
+            List<NoteShape> notes = sm.viewMusicSheet();
             assertEquals("My sheet music", sm.getSheetMusicName());
             assertEquals(3, notes.size());
-            checkNote("a", notes.get(0));
-            checkNote("b", notes.get(1));
-            checkNote("a", notes.get(2));
+            checkNote(50, 20, notes.get(0));
+            checkNote(10, 20, notes.get(1));
+            checkNote(50, 10, notes.get(2));
 
         } catch (IOException e) {
             fail("Could not read file");

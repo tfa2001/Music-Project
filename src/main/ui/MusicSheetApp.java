@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MusicSheetApp {
+/* public class MusicSheetApp {
     private static final String JSON_STORE = "./data/sheetMusic.json";
     private Notes note;
     private SheetMusic score;
@@ -159,4 +159,4 @@ public class MusicSheetApp {
         }
     }
 
-}
+}*/
