@@ -2,29 +2,40 @@ package ui;
 
 import model.Notes;
 import model.SheetMusic;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import ui.drawing.NoteShape;
 import ui.drawing.SheetMusicDrawing;
 import ui.tools.AddNoteTool;
 import ui.tools.ClearTool;
 import ui.tools.RemoveTool;
 import ui.tools.Tool;
+import ui.tools.menu.LoadToolClickHandler;
+import ui.tools.menu.QuitToolClickHandler;
+import ui.tools.menu.SaveToolClickHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MusicSheetEditor extends JFrame {
     //TODO: Some code based on SimpleDrawingPlayer
 
+    private static final String JSON_STORE = "./data/sheetMusic.json";
     public static final int WIDTH = 1450;
     public static final int HEIGHT = 700;
 
     private List<Tool> tools;
     private Tool tool;
     private SheetMusicDrawing currDrawing;
+
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     public static void main(String[] args) {
         new MusicSheetEditor();
@@ -50,6 +61,8 @@ public class MusicSheetEditor extends JFrame {
     private void initializeFields() {
         tools = new ArrayList<>();
         tool = null;
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     private void initializeFrame() {
@@ -78,6 +91,28 @@ public class MusicSheetEditor extends JFrame {
         }
         activeTool.activate();
         tool = activeTool;
+    }
+
+    // Code based on JSON demo
+    // EFFECTS: loads sheet music from file
+    public void loadMusicSheet() {
+        try {
+            currDrawing = jsonReader.read();
+        } catch (IOException e) {
+            System.out.println("Unable to read file from: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: allows us to save music sheet
+    public void saveMusicSheet() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(currDrawing);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
@@ -116,9 +151,15 @@ public class MusicSheetEditor extends JFrame {
         JMenu file = new JMenu("File");
         jmb.add(file);
 
-        JMenuItem open = new JMenu("Open File...");
-        JMenuItem save = new JMenu("Save as...");
-        JMenuItem quit = new JMenu("Quit");
+        JMenuItem open = new JMenuItem("Open Previous File");
+        open.addActionListener(new LoadToolClickHandler(this));
+
+        JMenuItem save = new JMenuItem("Save");
+        save.addActionListener(new SaveToolClickHandler(this));
+
+        JMenuItem quit = new JMenuItem("Quit");
+        quit.addActionListener(new QuitToolClickHandler());
+
         file.add(open);
         file.add(save);
         file.addSeparator();

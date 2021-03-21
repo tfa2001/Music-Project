@@ -87,40 +87,12 @@ public class SheetMusic extends JPanel implements Writable {
         return sheet.size();
     }
 
-    // getter
-    public String getSheetMusicName() {
-        return scoreName;
-    }
-
     // setter
     public void setMusicSheetName(String name) {
         this.scoreName = name;
     }
 
-    // EFFECTS: paints grid, playback line, and all figures in drawing
-    //          Note to students: calls to repaint gets here via the Java graphics framework
-    //
-    // Note: part of the code based from stackoverflow: https://stackoverflow.com/questions/4533526/
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        int x1 = (this.getWidth() - width) / 2;
-        g.drawImage(img, x1, 0, width, height, this);
-        for (Notes note : sheet) {
-            note.draw(g);
-        }
-    }
 
-    // EFFECTS: returns the Shape at a given Point in Drawing, if any
-    public Notes getShapesAtPoint(Point point) {
-        for (Notes note : sheet) {
-            if (note.contains(point)) {
-                return note;
-            }
-
-        }
-        return null;
-    }
 
     @Override
     // Code based on JsonReader Demo
