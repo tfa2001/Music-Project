@@ -1,21 +1,12 @@
 package model;
 
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import persistence.Writable;
-import ui.drawing.NoteShape;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SheetMusic extends JPanel implements Writable {
+public class SheetMusic {
 
     private Notes notes;
     private String letter;
@@ -24,19 +15,12 @@ public class SheetMusic extends JPanel implements Writable {
     private List<Notes> sheet;
 
     private Image img;
-    private final int width = 1400;
-    private final int height = 375;
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic(String title) {
         super();
         this.scoreName = title;
         this.sheet = new ArrayList<>();
-        try {
-            img = ImageIO.read(new File("./data/newMusicStaff.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -46,7 +30,6 @@ public class SheetMusic extends JPanel implements Writable {
     public Boolean addNote(Notes note) {
         this.notes = note;
         this.letter = notes.getNoteName();
-        repaint();
         return sheet.add(note);
     }
 
@@ -56,7 +39,6 @@ public class SheetMusic extends JPanel implements Writable {
      */
     public void removeNote(Notes n) {
         sheet.remove(n);
-        repaint();
     }
 
     /* MODIFIES: this
@@ -64,7 +46,6 @@ public class SheetMusic extends JPanel implements Writable {
      */
     public void removeAllNotes() {
         sheet.clear();
-        repaint();
     }
 
     /* EFFECTS: View my music sheet
@@ -93,24 +74,6 @@ public class SheetMusic extends JPanel implements Writable {
     }
 
 
-
-    @Override
-    // Code based on JsonReader Demo
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("title", scoreName);
-        json.put("notes", notesToJson());
-        return json;
-    }
-
-    // Code based on JsonReader Demo
-    private JSONArray notesToJson() {
-        JSONArray jsonArray = new JSONArray();
-        for (Notes note : sheet) {
-            jsonArray.put(note.toJson());
-        }
-        return jsonArray;
-    }
 
 
 

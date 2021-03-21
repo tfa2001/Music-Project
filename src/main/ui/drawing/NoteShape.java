@@ -67,6 +67,12 @@ public class NoteShape implements Writable {
         return containsX(pointx) && containsY(pointy);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  adds dx to the shapes x coordinate, and dy to the shapes y coordinate.
+    public void move(int dx, int dy) {
+        x1 += dx;
+        y1 += dy;
+    }
 
     // getters
 

@@ -69,4 +69,7 @@ public abstract class Tool {
     // EFFECTS: default behaviour does nothing
     public void mousePressedOnNote(MouseEvent e) {}
 
+    // EFFECTS: default behaviour does nothing
+    public void mouseDraggedOnNote(MouseEvent e) {}
+
 }
