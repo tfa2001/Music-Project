@@ -15,12 +15,14 @@ public class NoteShape implements Writable {
     private int width;
     private int height;
 
+    // EFFECTS: creates a note
     public NoteShape(Point center, int w, int h) {
         this((int) center.getX(), (int) center.getY(), w, h);
         this.height = h;
         this.width = w;
     }
 
+    // EFFECTS: creates a note
     public NoteShape(int x, int y, int w, int h) {
         this.x1 = x;
         this.y1 = y;
@@ -63,7 +65,6 @@ public class NoteShape implements Writable {
     public boolean contains(Point point) {
         int pointx = point.x;
         int pointy = point.y;
-
         return containsX(pointx) && containsY(pointy);
     }
 
@@ -74,20 +75,22 @@ public class NoteShape implements Writable {
         y1 += dy;
     }
 
-    // getters
-
+    // getter
     public int getHeight() {
         return height;
     }
 
+    // getter
     public int getWidth() {
         return width;
     }
 
+    // getter
     public int getX1() {
         return x1;
     }
 
+    // getter
     public int getY1() {
         return y1;
     }

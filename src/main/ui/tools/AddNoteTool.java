@@ -10,20 +10,25 @@ import java.awt.event.MouseEvent;
 
 //TODO: Code based on SimpleDrawingPlayer
 public class AddNoteTool extends Tool {
-    private static final int width = 40;
-    private static final int height = 25;
+    private static final int width = 35;
+    private static final int height = 20;
     private NoteShape note;
 
     public AddNoteTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  constructs an add button which is then added to the JComponent (parent)
+    //           which is passed in as a parameter
     @Override
     protected void createButton(JComponent parent) {
         button = new JButton("Add Note");
         addToParent(parent);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  constructs a new listener object which is added to the JButton
     @Override
     protected void addListener() {
         button.addActionListener(new AddToolClickHandler());

@@ -32,12 +32,8 @@ public class MusicSheetEditor extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    public static void main(String[] args) {
-        new MusicSheetEditor();
-    }
-
     // EFFECTS: Initializes MusicSheetEditor
-    public MusicSheetEditor() {
+    public MusicSheetEditor() throws FileNotFoundException {
         super("My Music Sheet");
         initializeFields();
         initializeInteraction();

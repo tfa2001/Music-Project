@@ -1,10 +1,8 @@
 package ui.drawing;
 
-import model.Notes;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import ui.drawing.NoteShape;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,15 +19,16 @@ public class SheetMusicDrawing extends JPanel implements Writable {
     private List<NoteShape> notes;
     private Image img;
     private final int width = 1400;
-    private final int height = 375;
+    private final int height = 500;
     private String scoreName;
 
+    // EFFECTS: creates a music sheet
     public SheetMusicDrawing(String title) {
         super();
         notes = new ArrayList<>();
         this.scoreName = title;
         try {
-            img = ImageIO.read(new File("./data/newMusicStaff.png"));
+            img = ImageIO.read(new File("./data/officialMusicStaff.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

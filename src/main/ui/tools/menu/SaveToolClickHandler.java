@@ -12,7 +12,7 @@ public class SaveToolClickHandler implements ActionListener {
         this.editor = editor;
     }
 
-
+    // EFFECTS: saves music sheet when it is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         editor.saveMusicSheet();

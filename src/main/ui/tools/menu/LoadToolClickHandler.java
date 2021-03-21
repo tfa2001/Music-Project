@@ -12,6 +12,7 @@ public class LoadToolClickHandler implements ActionListener {
         this.editor = editor;
     }
 
+    // EFFECTS: loads music sheet when it is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         editor.loadMusicSheet();

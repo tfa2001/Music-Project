@@ -22,15 +22,6 @@ public abstract class Tool {
         addListener();
     }
 
-    // MODIFIES: this
-    // EFFECTS:  customizes the button used for this tool
-    protected JButton customizeButton(JButton button) {
-        button.setBorderPainted(true);
-        button.setFocusPainted(true);
-        button.setContentAreaFilled(true);
-        return button;
-    }
-
     // getters
     public boolean isActive() {
         return active;

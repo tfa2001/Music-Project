@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class QuitToolClickHandler implements ActionListener {
 
-
+    // EFFECTS: quits music sheet when it is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         System.exit(0);
