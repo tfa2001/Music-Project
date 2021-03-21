@@ -1,15 +1,10 @@
 package ui;
 
-import model.Notes;
-import model.SheetMusic;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.drawing.NoteShape;
 import ui.drawing.SheetMusicDrawing;
-import ui.tools.AddNoteTool;
-import ui.tools.ClearTool;
-import ui.tools.RemoveTool;
-import ui.tools.Tool;
+import ui.tools.*;
 import ui.tools.menu.LoadToolClickHandler;
 import ui.tools.menu.QuitToolClickHandler;
 import ui.tools.menu.SaveToolClickHandler;
@@ -126,13 +121,16 @@ public class MusicSheetEditor extends JFrame {
         toolArea.setSize(new Dimension(0, 0));
         add(toolArea, BorderLayout.SOUTH);
 
-        AddNoteTool addTool = new AddNoteTool(this, toolArea);
+        Tool addTool = new AddNoteTool(this, toolArea);
         tools.add(addTool);
 
-        RemoveTool removeTool = new RemoveTool(this, toolArea);
+        Tool moveTool = new MoveTool(this, toolArea);
+        tools.add(moveTool);
+
+        Tool removeTool = new RemoveTool(this, toolArea);
         tools.add(removeTool);
 
-        ClearTool clearTool = new ClearTool(this, toolArea);
+        Tool clearTool = new ClearTool(this, toolArea);
         tools.add(clearTool);
 
         setActiveTool(addTool);
@@ -202,6 +200,11 @@ public class MusicSheetEditor extends JFrame {
             handleMouseClicked(translateEvent(e));
         }
 
+        // EFFECTS:Forward mouse dragged event to the active tool
+        public void mouseDragged(MouseEvent e) {
+            handleMouseDragged(translateEvent(e));
+        }
+
         // EFFECTS: translates the mouse event to current drawing's coordinate system
         private MouseEvent translateEvent(MouseEvent e) {
             return SwingUtilities.convertMouseEvent(e.getComponent(), e, currDrawing);
@@ -231,6 +234,15 @@ public class MusicSheetEditor extends JFrame {
     private void handleMousePressed(MouseEvent e) {
         if (tool != null) {
             tool.mousePressedOnNote(e);
+        }
+        repaint();
+    }
+
+    // EFFECTS: if activeTool != null, then mouseDraggedInDrawingArea is invoked on activeTool, depends on the
+    //          type of the tool which is currently activeTool
+    private void handleMouseDragged(MouseEvent e) {
+        if (tool != null) {
+            tool.mouseDraggedOnNote(e);
         }
         repaint();
     }

@@ -10,8 +10,8 @@ import java.awt.event.MouseEvent;
 
 //TODO: Code based on SimpleDrawingPlayer
 public class AddNoteTool extends Tool {
-    private static final int width = 50;
-    private static final int height = 30;
+    private static final int width = 40;
+    private static final int height = 25;
     private NoteShape note;
 
     public AddNoteTool(MusicSheetEditor editor, JComponent parent) {
