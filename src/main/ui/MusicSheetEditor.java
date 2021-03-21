@@ -2,6 +2,8 @@ package ui;
 
 import model.Notes;
 import model.SheetMusic;
+import ui.drawing.NoteShape;
+import ui.drawing.SheetMusicDrawing;
 import ui.tools.AddNoteTool;
 import ui.tools.ClearTool;
 import ui.tools.RemoveTool;
@@ -22,7 +24,7 @@ public class MusicSheetEditor extends JFrame {
 
     private List<Tool> tools;
     private Tool tool;
-    private SheetMusic currDrawing;
+    private SheetMusicDrawing currDrawing;
 
     public static void main(String[] args) {
         new MusicSheetEditor();
@@ -61,7 +63,7 @@ public class MusicSheetEditor extends JFrame {
     }
 
     private void addNewDrawing() {
-        SheetMusic newDrawing = new SheetMusic("Music Sheet");
+        SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
         currDrawing = newDrawing;
         add(newDrawing, BorderLayout.CENTER);
         validate();
@@ -103,8 +105,8 @@ public class MusicSheetEditor extends JFrame {
 
     // MODIFIES: this
     // EFFECTS:  adds given Shape to currentDrawing
-    public void addToDrawing(Notes f) {
-        currDrawing.addNote(f);
+    public void addToDrawing(NoteShape f) {
+        currDrawing.addShape(f);
     }
 
     // EFFECTS: Makes a MenuBar where you can save, open, and quit program
@@ -124,20 +126,20 @@ public class MusicSheetEditor extends JFrame {
     }
 
     // EFFECTS: return notes at given point at the currentDrawing
-    public Notes getShapeInDrawing(Point point) {
+    public NoteShape getShapeInDrawing(Point point) {
         return currDrawing.getShapesAtPoint(point);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes note from currentDrawing
-    public void removeFromDrawing(Notes f) {
-        currDrawing.removeNote(f);
+    public void removeFromDrawing(NoteShape f) {
+        currDrawing.removeShape(f);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes given Shape from currentDrawing
     public void clearNotesFromDrawing() {
-        currDrawing.removeAllNotes();
+        currDrawing.clearShapes();
     }
 
 
