@@ -1,6 +1,6 @@
 package ui.tools;
 
-import ui.drawing.SheetMusicDrawing;
+import model.SheetMusic;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class ClearTool extends Tool {
 
-    private SheetMusicDrawing drawing;
+    private SheetMusic drawing;
 
     public ClearTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);

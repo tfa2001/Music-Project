@@ -19,9 +19,9 @@ class SheetMusicTest {
     @BeforeEach
     public void setup() {
         score = new SheetMusic("Sheet 1");
-        note1 = new Notes("A");
-        note2 = new Notes("C");
-        note3 = new Notes("B");
+        note1 = new Notes("A", score.getWidth(), score.getHeight());
+        note2 = new Notes("C", score.getWidth(), score.getHeight());
+        note3 = new Notes("B", score.getWidth(), score.getHeight());
     }
 
 
@@ -39,15 +39,15 @@ class SheetMusicTest {
     @Test
     public void testRemoveNote() {
         assertTrue(score.addNote(note1));
-        assertTrue(score.removeNote("A"));
+        score.removeNote(note1);
         assertEquals(0, score.getNoteListSize());
 
         assertTrue(score.addNote(note1));
         assertTrue(score.addNote(note1));
-        assertTrue(score.removeNote("A"));
+        score.removeNote(note1);
         assertEquals(1, score.getNoteListSize());
 
-        assertFalse(score.removeNote("B"));
+        score.removeNote(note2);
         assertEquals(1, score.getNoteListSize());
     }
 
@@ -68,9 +68,9 @@ class SheetMusicTest {
         List<Notes> sheetMusic = score.viewMusicSheet();
 
         List<Notes> expected = new ArrayList<>();
-        expected.add(0, new Notes("B"));
-        expected.add(0, new Notes("C"));
-        expected.add(0, new Notes("A"));
+        expected.add(0, new Notes("B", score.getWidth(), score.getHeight()));
+        expected.add(0, new Notes("C", score.getWidth(), score.getHeight()));
+        expected.add(0, new Notes("A", score.getWidth(), score.getHeight()));
 //      assertEquals(expected, sheetMusic);
 
         score.removeAllNotes();

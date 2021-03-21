@@ -65,20 +65,28 @@ import java.util.Scanner;
     // EFFECTS: asks user about what they would like to do
     // Note: code inspired by Teller App
     private void continueOperation(String command) {
-        if (command.equals("a")) {
-            doAddNote();
-        } else if (command.equals("r")) {
-            doRemoveNote();
-        } else if (command.equals("c")) {
-            doClearMusicSheet();
-        } else if (command.equals("v")) {
-            doViewMusicSheet();
-        } else if (command.equals("s")) {
-            doSaveMusicSheet();
-        } else if (command.equals("l")) {
-            doLoadMusicSheet();
-        } else {
-            System.out.println("Selection not valid");
+        switch (command) {
+            case "a":
+                doAddNote();
+                break;
+            case "r":
+                doRemoveNote();
+                break;
+            case "c":
+                doClearMusicSheet();
+                break;
+            case "v":
+                doViewMusicSheet();
+                break;
+            case "s":
+                doSaveMusicSheet();
+                break;
+            case "l":
+                doLoadMusicSheet();
+                break;
+            default:
+                System.out.println("Selection not valid");
+                break;
         }
     }
 
@@ -99,7 +107,7 @@ import java.util.Scanner;
         System.out.print("Enter the letter of the note that you would like to add: ");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
-        note = new Notes(noteName);
+        note = new Notes(noteName, score.getWidth(), score.getHeight());
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
@@ -119,6 +127,7 @@ import java.util.Scanner;
         System.out.print("Enter the letter of the note that you would like to remove:");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
+        note = new Notes(noteName, score.getWidth(), score.getHeight());
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
@@ -126,7 +135,7 @@ import java.util.Scanner;
                 || noteName.equalsIgnoreCase("E")
                 || noteName.equalsIgnoreCase("F")
                 || noteName.equalsIgnoreCase("G")) {
-            score.removeNote(noteName);
+            score.removeNote(note);
         } else {
             System.out.println(noteName + " is not a note.");
         }
