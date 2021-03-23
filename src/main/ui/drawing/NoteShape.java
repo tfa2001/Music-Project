@@ -9,6 +9,8 @@ import java.awt.*;
 
 //TODO: Some code based on Simple Drawing Player
 public class NoteShape implements Writable {
+    public static final int WIDTH = 40;
+    public static final int HEIGHT = 25;
 
     private int x1;
     private int y1;

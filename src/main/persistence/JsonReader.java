@@ -16,8 +16,6 @@ import java.util.stream.Stream;
 
 public class JsonReader {
     private String file;
-    private static final int width = 50;
-    private static final int height = 30;
 
     // EFFECTS: constructs reader from source file
     // Code based on JsonReader Demo
@@ -74,7 +72,7 @@ public class JsonReader {
     private void addNote(SheetMusicDrawing sm, JSONObject jsonObject) {
         int x1 = jsonObject.getInt("x-position");
         int y1 = jsonObject.getInt("y-position");
-        NoteShape note = new NoteShape(x1, y1, width, height);
+        NoteShape note = new NoteShape(x1, y1, NoteShape.WIDTH, NoteShape.HEIGHT);
         sm.addShape(note);
     }
 

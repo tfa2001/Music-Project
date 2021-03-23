@@ -5,7 +5,6 @@ import persistence.JsonWriter;
 import ui.drawing.NoteShape;
 import ui.drawing.SheetMusicDrawing;
 import ui.tools.*;
-import ui.tools.menu.LoadToolClickHandler;
 import ui.tools.menu.QuitToolClickHandler;
 import ui.tools.menu.SaveToolClickHandler;
 
@@ -67,10 +66,23 @@ public class MusicSheetEditor extends JFrame {
     }
 
     private void addNewDrawing() {
-        SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
-        currDrawing = newDrawing;
-        add(newDrawing, BorderLayout.CENTER);
-        validate();
+        try {
+            SheetMusicDrawing newDrawing = jsonReader.read();
+            int answer = JOptionPane.showConfirmDialog(null,
+                    "Found an existing project. Would you like to open it?",
+                    "Confirm", JOptionPane.YES_NO_OPTION);
+            if (answer == JOptionPane.NO_OPTION) {
+                newDrawing = new SheetMusicDrawing("Music Sheet");
+            }
+            currDrawing = newDrawing;
+            add(newDrawing, BorderLayout.CENTER);
+            validate();
+        } catch (IOException e) {
+            SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
+            currDrawing = newDrawing;
+            add(newDrawing, BorderLayout.CENTER);
+            validate();
+        }
     }
 
 
@@ -145,16 +157,12 @@ public class MusicSheetEditor extends JFrame {
         JMenu file = new JMenu("File");
         jmb.add(file);
 
-        JMenuItem open = new JMenuItem("Open Previous File");
-        open.addActionListener(new LoadToolClickHandler(this));
-
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(new SaveToolClickHandler(this));
 
         JMenuItem quit = new JMenuItem("Quit");
-        quit.addActionListener(new QuitToolClickHandler());
+        quit.addActionListener(new QuitToolClickHandler(this));
 
-        file.add(open);
         file.add(save);
         file.addSeparator();
         file.add(quit);
