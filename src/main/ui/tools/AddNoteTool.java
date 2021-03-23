@@ -50,7 +50,7 @@ public class AddNoteTool extends Tool {
 
     //EFFECTS: Constructs and returns the new shape
     private void makeShape(MouseEvent e) {
-        note = new NoteShape(e.getPoint(), NoteShape.WIDTH, NoteShape.HEIGHT);
+        note = new NoteShape(e.getPoint(), NoteShape.NOTE_WIDTH, NoteShape.NOTE_HEIGHT);
     }
 
     private class AddToolClickHandler implements ActionListener {

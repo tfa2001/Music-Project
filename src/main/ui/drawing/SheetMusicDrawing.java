@@ -35,8 +35,6 @@ public class SheetMusicDrawing extends JPanel implements Writable {
     }
 
     // EFFECTS: paints grid, playback line, and all figures in drawing
-    //          Note to students: calls to repaint gets here via the Java graphics framework
-    //
     // Note: part of the code based from stackoverflow: https://stackoverflow.com/questions/4533526/
     @Override
     public void paintComponent(Graphics g) {
@@ -48,33 +46,32 @@ public class SheetMusicDrawing extends JPanel implements Writable {
         }
     }
 
-    // EFFECTS: returns the Shape at a given Point in Drawing, if any
-    public NoteShape getShapesAtPoint(Point point) {
+    // EFFECTS: returns the notes at a given Point in editor, if any
+    public NoteShape getNotesAtPoint(Point point) {
         for (NoteShape note : notes) {
             if (note.contains(point)) {
                 return note;
             }
-
         }
         return null;
     }
 
     // MODIFIES: this
-    // EFFECTS:  adds the given shape to the drawing
-    public void addShape(NoteShape n) {
+    // EFFECTS:  adds the given shape to the editor
+    public void addNote(NoteShape n) {
         notes.add(n);
     }
 
     // MODIFIES: this
-    // EFFECTS:  removes shape from the drawing
-    public void removeShape(NoteShape n) {
+    // EFFECTS:  removes shape from the editor
+    public void removeNote(NoteShape n) {
         notes.remove(n);
         repaint();
     }
 
     // MODIFIES: this
-    // EFFECTS:  removes all shapes from drawing
-    public void clearShapes() {
+    // EFFECTS:  removes all shapes from editor
+    public void clearNotes() {
         notes.clear();
         repaint();
     }

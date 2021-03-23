@@ -31,14 +31,22 @@ public class ClearTool extends Tool {
         button.addActionListener(new ClearTool.ClearToolClickHandler());
     }
 
-
-
     private class ClearToolClickHandler implements ActionListener {
 
         // EFFECTS: sets active tool to the delete tool
         //          called by the framework when the tool is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
+            beforeClearingMessage();
+        }
+    }
+
+    // EFFECTS: creates a pop-up message that asks if user would like to save project
+    private void beforeClearingMessage() {
+        int answer = JOptionPane.showConfirmDialog(null,
+                "Are you sure that you will clear Music Sheet? This action cannot be undone.",
+                "Confirm", JOptionPane.YES_NO_OPTION);
+        if (answer == JOptionPane.YES_OPTION) {
             editor.clearNotesFromDrawing();
         }
     }

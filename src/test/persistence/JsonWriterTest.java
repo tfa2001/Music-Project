@@ -52,9 +52,9 @@ public class JsonWriterTest extends JsonTest {
     public void testWriterGeneralSheetMusic() {
         try {
             SheetMusicDrawing sm = new SheetMusicDrawing("My sheet music");
-            sm.addShape(new NoteShape(50, 20, width, height));
-            sm.addShape(new NoteShape(10, 20, width, height));
-            sm.addShape(new NoteShape(50, 10, width, height));
+            sm.addNote(new NoteShape(50, 20, width, height));
+            sm.addNote(new NoteShape(10, 20, width, height));
+            sm.addNote(new NoteShape(50, 10, width, height));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralSheetMusic.json");
             writer.open();
             writer.write(sm);

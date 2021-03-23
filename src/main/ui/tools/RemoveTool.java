@@ -1,6 +1,5 @@
 package ui.tools;
 
-import model.Notes;
 import ui.MusicSheetEditor;
 import ui.drawing.NoteShape;
 
@@ -12,11 +11,11 @@ import java.awt.event.MouseEvent;
 //TODO: Code based on SimpleDrawingPlayer
 public class RemoveTool extends Tool {
 
-    private NoteShape shapeToDelete;
+    private NoteShape noteToDelete;
 
     public RemoveTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
-        shapeToDelete = null;
+        noteToDelete = null;
     }
 
     // MODIFIES: this
@@ -40,17 +39,17 @@ public class RemoveTool extends Tool {
     //           selects the shape and plays it
     @Override
     public void mousePressedOnNote(MouseEvent e) {
-        shapeToDelete = editor.getShapeInDrawing(e.getPoint());
+        noteToDelete = editor.getNoteInDrawing(e.getPoint());
     }
 
     // MODIFIES: this
     // EFFECTS:  unselects the shape being deleted, and removes it from the drawing
     @Override
     public void mouseReleasedOnNote(MouseEvent e) {
-        if (shapeToDelete != null) {
-            editor.removeFromDrawing(shapeToDelete);
+        if (noteToDelete != null) {
+            editor.removeFromDrawing(noteToDelete);
         }
-        shapeToDelete = null;
+        noteToDelete = null;
     }
 
     private class RemoveToolClickHandler implements ActionListener {

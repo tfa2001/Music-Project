@@ -35,14 +35,14 @@ public class MusicSheetEditor extends JFrame {
     public MusicSheetEditor() throws FileNotFoundException {
         super("My Music Sheet");
         initializeFields();
-        initializeInteraction();
+        initializeListeners();
         initializeFrame();
 
     }
 
     // MODIFIES: this
     // EFFECTS:  initializes a DrawingMouseListener to be used in the JFrame
-    private void initializeInteraction() {
+    private void initializeListeners() {
         DrawingMouseListener dml = new DrawingMouseListener();
         addMouseListener(dml);
         addMouseMotionListener(dml);
@@ -62,7 +62,7 @@ public class MusicSheetEditor extends JFrame {
     private void initializeFrame() {
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        addNewDrawing();
+        addNewMusicSheetDrawing();
         createTools();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -71,31 +71,35 @@ public class MusicSheetEditor extends JFrame {
 
     // MODIFIES: this
     // EFFECTS:  initializes a music sheet
-    private void addNewDrawing() {
+    private void addNewMusicSheetDrawing() {
         try {
             SheetMusicDrawing newDrawing = jsonReader.read();
-            // Code based on Youtube video: https://www.youtube.com/watch?v=4edL_cwmiZ4&t=92s
-            int answer = JOptionPane.showConfirmDialog(null,
-                    "Found an existing project. Would you like to open it?",
-                    "Confirm", JOptionPane.YES_NO_OPTION);
-            if (answer == JOptionPane.NO_OPTION) {
+            int ans = existingProjectMessage();
+            if (ans == JOptionPane.NO_OPTION) {
                 newDrawing = new SheetMusicDrawing("Music Sheet");
             }
             currDrawing = newDrawing;
             add(newDrawing, BorderLayout.CENTER);
-            validate();
         } catch (IOException e) {
             SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
-            existingProjectMessage();
+            nonExistingProjectMessage();
             currDrawing = newDrawing;
             add(newDrawing, BorderLayout.CENTER);
+        } finally {
             validate();
         }
+
+    }
+
+    // EFFECTS: creates a pop up message for if file is found
+    private int existingProjectMessage() {
+        return JOptionPane.showConfirmDialog(null,
+                "Found an existing project. Would you like to open it?",
+                "Confirm", JOptionPane.YES_NO_OPTION);
     }
 
     // EFFECTS: creates a pop up message for if file is not found
-    // Code based on Youtube video: https://www.youtube.com/watch?v=4edL_cwmiZ4&t=92s
-    private void existingProjectMessage() {
+    private void nonExistingProjectMessage() {
         JOptionPane.showMessageDialog(null,
                 "There is no existing project... Opening a new Music Sheet.",
                 "File Not Found", JOptionPane.INFORMATION_MESSAGE);
@@ -122,7 +126,7 @@ public class MusicSheetEditor extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: allows us to save music sheet
+    // EFFECTS: allows user to save music sheet
     public void saveMusicSheet() {
         try {
             jsonWriter.open();
@@ -162,7 +166,7 @@ public class MusicSheetEditor extends JFrame {
     // MODIFIES: this
     // EFFECTS:  adds given Shape to currentDrawing
     public void addToDrawing(NoteShape f) {
-        currDrawing.addShape(f);
+        currDrawing.addNote(f);
     }
 
     // EFFECTS: Makes a MenuBar where you can save, open, and quit program
@@ -184,20 +188,20 @@ public class MusicSheetEditor extends JFrame {
     }
 
     // EFFECTS: return notes at given point at the currentDrawing
-    public NoteShape getShapeInDrawing(Point point) {
-        return currDrawing.getShapesAtPoint(point);
+    public NoteShape getNoteInDrawing(Point point) {
+        return currDrawing.getNotesAtPoint(point);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes note from currentDrawing
     public void removeFromDrawing(NoteShape f) {
-        currDrawing.removeShape(f);
+        currDrawing.removeNote(f);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes given Shape from currentDrawing
     public void clearNotesFromDrawing() {
-        currDrawing.clearShapes();
+        currDrawing.clearNotes();
     }
 
 

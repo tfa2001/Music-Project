@@ -1,7 +1,5 @@
 package persistence;
 
-import model.Notes;
-import model.SheetMusic;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ui.drawing.NoteShape;
@@ -72,8 +70,8 @@ public class JsonReader {
     private void addNote(SheetMusicDrawing sm, JSONObject jsonObject) {
         int x1 = jsonObject.getInt("x-position");
         int y1 = jsonObject.getInt("y-position");
-        NoteShape note = new NoteShape(x1, y1, NoteShape.WIDTH, NoteShape.HEIGHT);
-        sm.addShape(note);
+        NoteShape note = new NoteShape(x1, y1, NoteShape.NOTE_WIDTH, NoteShape.NOTE_HEIGHT);
+        sm.addNote(note);
     }
 
 

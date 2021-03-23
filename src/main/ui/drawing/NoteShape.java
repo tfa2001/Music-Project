@@ -9,8 +9,8 @@ import java.awt.*;
 
 //TODO: Some code based on Simple Drawing Player
 public class NoteShape implements Writable {
-    public static final int WIDTH = 40;
-    public static final int HEIGHT = 25;
+    public static final int NOTE_WIDTH = 40;
+    public static final int NOTE_HEIGHT = 25;
 
     private int x1;
     private int y1;
@@ -35,10 +35,9 @@ public class NoteShape implements Writable {
     // EFFECTS: draws this Shape on the SimpleDrawingPlayer, if the shape is selected, Shape is filled in
     //          else, Shape is unfilled (white)
     public void draw(Graphics g) {
-        Color save = g.getColor();
-
+        Color c = g.getColor();
         fillGraphics(g);
-        g.setColor(save);
+        g.setColor(c);
         drawGraphics(g);
     }
 
@@ -53,38 +52,18 @@ public class NoteShape implements Writable {
         g.fillOval(x1, y1, width, height);
     }
 
-    // EFFECTS: return true iff the given x value is within the bounds of the Shape
-    public boolean containsX(int x) {
-        return (this.x1 <= x) && (x <= this.x1 + width);
-    }
-
-    // EFFECTS: return true iff the given y value is within the bounds of the Shape
-    public boolean containsY(int y) {
-        return (this.y1 <= y) && (y <= this.y1 + height);
-    }
-
     // EFFECTS: return true if the given Point (x,y) is contained within the bounds of this Shape
     public boolean contains(Point point) {
-        int pointx = point.x;
-        int pointy = point.y;
-        return containsX(pointx) && containsY(pointy);
+        int x = point.x;
+        int y = point.y;
+        return (this.x1 <= x) && (x <= this.x1 + width) && (this.y1 <= y) && (y <= this.y1 + height);
     }
 
     // MODIFIES: this
     // EFFECTS:  adds dx to the shapes x coordinate, and dy to the shapes y coordinate.
     public void move(int dx, int dy) {
-        x1 += dx;
-        y1 += dy;
-    }
-
-    // getter
-    public int getHeight() {
-        return height;
-    }
-
-    // getter
-    public int getWidth() {
-        return width;
+        x1 = x1 + dx;
+        y1 = y1 + dy;
     }
 
     // getter

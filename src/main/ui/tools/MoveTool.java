@@ -12,13 +12,13 @@ import java.awt.event.MouseEvent;
 //TODO: Code based on SimpleDrawingPlayer
 public class MoveTool extends Tool {
 
-    private NoteShape shapeToMove;
-    private Point start;
+    private NoteShape noteToMove;
+    private Point initial;
 
     public MoveTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
-        shapeToMove = null;
-        start = null;
+        noteToMove = null;
+        initial = null;
     }
 
     // MODIFIES: this
@@ -43,9 +43,9 @@ public class MoveTool extends Tool {
     //           the move with the current location of the MouseEvent
     @Override
     public void mousePressedOnNote(MouseEvent e) {
-        shapeToMove = editor.getShapeInDrawing(e.getPoint());
-        if (shapeToMove != null) {
-            start = e.getPoint();
+        noteToMove = editor.getNoteInDrawing(e.getPoint());
+        if (noteToMove != null) {
+            initial = e.getPoint();
         }
     }
 
@@ -53,8 +53,8 @@ public class MoveTool extends Tool {
     // EFFECTS:  unselect the shape, and set the shape to be moved to null
     @Override
     public void mouseReleasedOnNote(MouseEvent e) {
-        if (shapeToMove != null) {
-            shapeToMove = null;
+        if (noteToMove != null) {
+            noteToMove = null;
         }
     }
 
@@ -62,11 +62,11 @@ public class MoveTool extends Tool {
     // EFFECTS:  compute the change in the x and y position of the mouse, and move the shape
     @Override
     public void mouseDraggedOnNote(MouseEvent e) {
-        if (shapeToMove != null) {
-            int dx = (int) (e.getPoint().getX() - start.getX());
-            int dy = (int) (e.getPoint().getY() - start.getY());
-            start = e.getPoint();
-            shapeToMove.move(dx, dy);
+        if (noteToMove != null) {
+            int dx = (int) (e.getPoint().getX() - initial.getX());
+            int dy = (int) (e.getPoint().getY() - initial.getY());
+            initial = e.getPoint();
+            noteToMove.move(dx, dy);
         }
     }
 
