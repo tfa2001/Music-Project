@@ -15,6 +15,7 @@ public class QuitToolClickHandler implements ActionListener {
         this.editor = editor;
     }
 
+    // EFFECTS: creates a pop-up message that asks if user would like to save project
     private void beforeQuittingMessage() {
         int answer = JOptionPane.showConfirmDialog(null,
                 "Would you like to save your project?",

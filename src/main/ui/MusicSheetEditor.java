@@ -48,6 +48,8 @@ public class MusicSheetEditor extends JFrame {
         addMouseMotionListener(dml);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  initializes the fields to be used in the JFrame
     private void initializeFields() {
         tools = new ArrayList<>();
         tool = null;
@@ -55,6 +57,8 @@ public class MusicSheetEditor extends JFrame {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  initializes the frame to be used in the JFrame
     private void initializeFrame() {
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -65,6 +69,8 @@ public class MusicSheetEditor extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  initializes a music sheet
     private void addNewDrawing() {
         try {
             SheetMusicDrawing newDrawing = jsonReader.read();
@@ -79,12 +85,19 @@ public class MusicSheetEditor extends JFrame {
             validate();
         } catch (IOException e) {
             SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
+            existingProjectMessage();
             currDrawing = newDrawing;
             add(newDrawing, BorderLayout.CENTER);
             validate();
         }
     }
 
+    // EFFECTS: creates a pop up message for if file is not found
+    private void existingProjectMessage() {
+        JOptionPane.showMessageDialog(null,
+                "There is no existing project... Opening a new Music Sheet.",
+                "File Not Found", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     // MODIFIES: this
     // EFFECTS:  sets the given tool as the activeTool
