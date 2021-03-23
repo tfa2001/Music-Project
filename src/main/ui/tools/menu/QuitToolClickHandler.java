@@ -16,6 +16,7 @@ public class QuitToolClickHandler implements ActionListener {
     }
 
     // EFFECTS: creates a pop-up message that asks if user would like to save project
+    // Code based on Youtube video: https://www.youtube.com/watch?v=4edL_cwmiZ4&t=92s
     private void beforeQuittingMessage() {
         int answer = JOptionPane.showConfirmDialog(null,
                 "Would you like to save your project?",

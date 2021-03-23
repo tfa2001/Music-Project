@@ -74,6 +74,7 @@ public class MusicSheetEditor extends JFrame {
     private void addNewDrawing() {
         try {
             SheetMusicDrawing newDrawing = jsonReader.read();
+            // Code based on Youtube video: https://www.youtube.com/watch?v=4edL_cwmiZ4&t=92s
             int answer = JOptionPane.showConfirmDialog(null,
                     "Found an existing project. Would you like to open it?",
                     "Confirm", JOptionPane.YES_NO_OPTION);
@@ -93,6 +94,7 @@ public class MusicSheetEditor extends JFrame {
     }
 
     // EFFECTS: creates a pop up message for if file is not found
+    // Code based on Youtube video: https://www.youtube.com/watch?v=4edL_cwmiZ4&t=92s
     private void existingProjectMessage() {
         JOptionPane.showMessageDialog(null,
                 "There is no existing project... Opening a new Music Sheet.",
