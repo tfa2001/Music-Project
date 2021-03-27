@@ -26,7 +26,7 @@ public class MusicSheetEditor extends JFrame {
 
     private List<Tool> tools;
     private Tool tool;
-    private SheetMusicDrawing currDrawing;
+    private SheetMusicDrawing musicSheet;
 
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -43,7 +43,7 @@ public class MusicSheetEditor extends JFrame {
     // MODIFIES: this
     // EFFECTS:  initializes a DrawingMouseListener to be used in the JFrame
     private void initializeListeners() {
-        DrawingMouseListener dml = new DrawingMouseListener();
+        SheetMusicMouseListener dml = new SheetMusicMouseListener();
         addMouseListener(dml);
         addMouseMotionListener(dml);
     }
@@ -78,12 +78,12 @@ public class MusicSheetEditor extends JFrame {
             if (ans == JOptionPane.NO_OPTION) {
                 newDrawing = new SheetMusicDrawing("Music Sheet");
             }
-            currDrawing = newDrawing;
+            musicSheet = newDrawing;
             add(newDrawing, BorderLayout.CENTER);
         } catch (IOException e) {
             SheetMusicDrawing newDrawing = new SheetMusicDrawing("Music Sheet");
             nonExistingProjectMessage();
-            currDrawing = newDrawing;
+            musicSheet = newDrawing;
             add(newDrawing, BorderLayout.CENTER);
         } finally {
             validate();
@@ -115,22 +115,12 @@ public class MusicSheetEditor extends JFrame {
         tool = activeTool;
     }
 
-    // Code based on JSON demo
-    // EFFECTS: loads sheet music from file
-    public void loadMusicSheet() {
-        try {
-            currDrawing = jsonReader.read();
-        } catch (IOException e) {
-            System.out.println("Unable to read file from: " + JSON_STORE);
-        }
-    }
-
     // MODIFIES: this
     // EFFECTS: allows user to save music sheet
     public void saveMusicSheet() {
         try {
             jsonWriter.open();
-            jsonWriter.write(currDrawing);
+            jsonWriter.write(musicSheet);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -166,7 +156,7 @@ public class MusicSheetEditor extends JFrame {
     // MODIFIES: this
     // EFFECTS:  adds given Shape to currentDrawing
     public void addToDrawing(NoteShape f) {
-        currDrawing.addNote(f);
+        musicSheet.addNote(f);
     }
 
     // EFFECTS: Makes a MenuBar where you can save, open, and quit program
@@ -189,24 +179,24 @@ public class MusicSheetEditor extends JFrame {
 
     // EFFECTS: return notes at given point at the currentDrawing
     public NoteShape getNoteInDrawing(Point point) {
-        return currDrawing.getNotesAtPoint(point);
+        return musicSheet.getNotesAtPoint(point);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes note from currentDrawing
     public void removeFromDrawing(NoteShape f) {
-        currDrawing.removeNote(f);
+        musicSheet.removeNote(f);
     }
 
     // MODIFIES: this
     // EFFECTS:  removes given Shape from currentDrawing
     public void clearNotesFromDrawing() {
-        currDrawing.clearNotes();
+        musicSheet.clearNotes();
     }
 
 
     // Code from SimpleDrawingEditor
-    private class DrawingMouseListener extends MouseAdapter {
+    private class SheetMusicMouseListener extends MouseAdapter {
 
         // EFFECTS: Forward mouse pressed event to the active tool
         public void mousePressed(MouseEvent e) {
@@ -230,7 +220,7 @@ public class MusicSheetEditor extends JFrame {
 
         // EFFECTS: translates the mouse event to current drawing's coordinate system
         private MouseEvent translateEvent(MouseEvent e) {
-            return SwingUtilities.convertMouseEvent(e.getComponent(), e, currDrawing);
+            return SwingUtilities.convertMouseEvent(e.getComponent(), e, musicSheet);
         }
     }
 

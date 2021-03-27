@@ -28,6 +28,7 @@ public class SheetMusicDrawing extends JPanel implements Writable {
         notes = new ArrayList<>();
         this.scoreName = title;
         try {
+            //image screenshot from https://www.blanksheetmusic.net/#g
             img = ImageIO.read(new File("./data/officialMusicStaff.png"));
         } catch (IOException e) {
             e.printStackTrace();
