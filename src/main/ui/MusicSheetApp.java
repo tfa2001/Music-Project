@@ -15,7 +15,6 @@ public class MusicSheetApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-
     private Scanner input; //Teller App
 
     // EFFECTS: Constructs a music sheet and runs the application
@@ -25,6 +24,10 @@ public class MusicSheetApp {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runMusicSheet();
+    }
+
+    public static void main(String[] args) {
+        new MusicSheetApp();
     }
 
     // MODIFIES: this
