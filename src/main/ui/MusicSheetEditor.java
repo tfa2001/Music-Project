@@ -37,15 +37,14 @@ public class MusicSheetEditor extends JFrame {
         initializeFields();
         initializeListeners();
         initializeFrame();
-
     }
 
     // MODIFIES: this
-    // EFFECTS:  initializes a DrawingMouseListener to be used in the JFrame
+    // EFFECTS:  initializes a SheetMusicMouseListener to be used in the JFrame
     private void initializeListeners() {
-        SheetMusicMouseListener dml = new SheetMusicMouseListener();
-        addMouseListener(dml);
-        addMouseMotionListener(dml);
+        SheetMusicMouseListener sml = new SheetMusicMouseListener();
+        addMouseListener(sml);
+        addMouseMotionListener(sml);
     }
 
     // MODIFIES: this

@@ -95,6 +95,7 @@ public class SheetMusicDrawing extends JPanel implements Writable {
 
     @Override
     // Code based on JsonReader Demo
+    // EFFECTS: returns this as JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("title", scoreName);
@@ -102,6 +103,7 @@ public class SheetMusicDrawing extends JPanel implements Writable {
         return json;
     }
 
+    // EFFECTS: returns NoteShape in this SheetMusicDrawing as a JSON array
     // Code based on JsonReader Demo
     private JSONArray notesToJson() {
         JSONArray jsonArray = new JSONArray();

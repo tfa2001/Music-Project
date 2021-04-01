@@ -13,6 +13,7 @@ public class RemoveTool extends Tool {
 
     private NoteShape noteToDelete;
 
+    // EFFECTS: creates a button that allows user to remove NoteShapes from SheetMusic
     public RemoveTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
         noteToDelete = null;

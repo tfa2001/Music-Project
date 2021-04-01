@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 public class AddNoteTool extends Tool {
     private NoteShape note;
 
+    // EFFECTS: creates a button that allows user to add NoteShape to SheetMusic
     public AddNoteTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
     }
@@ -33,24 +34,19 @@ public class AddNoteTool extends Tool {
     }
 
     // MODIFIES: this
-    // EFFECTS:  a shape is instantiate MouseEvent occurs, and played and
+    // EFFECTS:  a note is made when MouseEvent occurs and
     //           added to the editor's drawing
     @Override
     public void mousePressedOnNote(MouseEvent e) {
-        makeShape(e);
+        note = new NoteShape(e.getPoint(), NoteShape.NOTE_WIDTH, NoteShape.NOTE_HEIGHT);
         editor.addToDrawing(note);
     }
 
     // MODIFIES: this
-    // EFFECTS:  unselects this shape, and sets it to null
+    // EFFECTS:  unselects this note, and sets it to null
     @Override
     public void mouseReleasedOnNote(MouseEvent e) {
         note = null;
-    }
-
-    //EFFECTS: Constructs and returns the new shape
-    private void makeShape(MouseEvent e) {
-        note = new NoteShape(e.getPoint(), NoteShape.NOTE_WIDTH, NoteShape.NOTE_HEIGHT);
     }
 
     private class AddToolClickHandler implements ActionListener {

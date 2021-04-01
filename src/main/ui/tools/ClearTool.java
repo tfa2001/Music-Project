@@ -1,6 +1,5 @@
 package ui.tools;
 
-import model.SheetMusic;
 import ui.MusicSheetEditor;
 
 import javax.swing.*;
@@ -9,8 +8,7 @@ import java.awt.event.ActionListener;
 
 public class ClearTool extends Tool {
 
-    private SheetMusic drawing;
-
+    // EFFECTS: creates a button that allows user to clear NoteShapes from SheetMusic
     public ClearTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
     }

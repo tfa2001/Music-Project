@@ -13,7 +13,7 @@ public abstract class Tool {
     protected MusicSheetEditor editor;
     private boolean active;
 
-
+    // EFFECTS: creates a button that allows user to perform different actions to SheetMusic
     public Tool(MusicSheetEditor editor, JComponent parent) {
         this.editor = editor;
         createButton(parent);

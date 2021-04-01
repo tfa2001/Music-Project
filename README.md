@@ -34,6 +34,21 @@ For this project, I hope to create a music sheet application that will be easier
   would like to save my changes. 
 - As a user, when I start my program, I would like to be asked if 
   I would like to open my recent project.
+
+## Phase 4: Task 2
+I chose to implement the type hierarchy. 
+My abstract Tool class is my superclass, and my subclasses are the 
+AddNoteTool, ClearTool, MoveTool, and RemoveTool classes. 
+
+
+## Phase 4: Task 3
+- As of right now, my Notes and SheetMusic classes are not being used. 
+I would have liked to be able to extend Notes and SheetMusic or 
+  associate them with NoteShape and SheetMusicDrawing.
+    
+- In order to make it even more robust, I would have made my AddNoteTool
+throw an exception if a note was added in the blank space in between the 
+  music staff
   
 
 

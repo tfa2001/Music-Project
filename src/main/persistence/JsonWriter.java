@@ -1,6 +1,5 @@
 package persistence;
 
-import model.SheetMusic;
 import org.json.JSONObject;
 import ui.drawing.SheetMusicDrawing;
 

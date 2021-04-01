@@ -5,11 +5,10 @@ import model.SheetMusic;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
-/* public class MusicSheetApp {
+public class MusicSheetApp {
+
     private static final String JSON_STORE = "./data/sheetMusic.json";
     private Notes note;
     private SheetMusic score;
@@ -20,7 +19,7 @@ import java.util.Scanner;
     private Scanner input; //Teller App
 
     // EFFECTS: Constructs a music sheet and runs the application
-    public MusicSheetApp() throws FileNotFoundException {
+    public MusicSheetApp() {
         score = new SheetMusic("My music sheet");
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -93,12 +92,7 @@ import java.util.Scanner;
     // Code based on JSON demo
     // EFFECTS: loads sheet music from file
     private void doLoadMusicSheet() {
-        try {
-            score = jsonReader.read();
-            System.out.println("Loaded " + score.getSheetMusicName() + " from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read file from: " + JSON_STORE);
-        }
+        System.out.println("Loaded " + score.getSheetMusicName() + " from " + JSON_STORE);
     }
 
     // MODIFIES: this
@@ -107,7 +101,7 @@ import java.util.Scanner;
         System.out.print("Enter the letter of the note that you would like to add: ");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
-        note = new Notes(noteName, score.getWidth(), score.getHeight());
+        note = new Notes(noteName);
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
@@ -127,7 +121,7 @@ import java.util.Scanner;
         System.out.print("Enter the letter of the note that you would like to remove:");
         System.out.print("\n(Select from A, B, C, D, E, F, or G)");
         String noteName = input.next();
-        note = new Notes(noteName, score.getWidth(), score.getHeight());
+        note = new Notes(noteName);
         if (noteName.equalsIgnoreCase("A")
                 || noteName.equalsIgnoreCase("B")
                 || noteName.equalsIgnoreCase("C")
@@ -159,13 +153,13 @@ import java.util.Scanner;
         System.out.println("What would you like to name your Music Sheet?");
         String title = input.next();
         score.saveMusicSheet(title);
-        try {
+        /*try {
             jsonWriter.open();
             jsonWriter.write(score);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
-        }
+        }*/
     }
 
-}*/
+}

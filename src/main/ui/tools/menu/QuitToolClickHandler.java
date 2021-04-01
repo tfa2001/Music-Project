@@ -11,6 +11,7 @@ public class QuitToolClickHandler implements ActionListener {
 
     private MusicSheetEditor editor;
 
+    // EFFECTS: creates a MenuBar that allows user to quit program
     public QuitToolClickHandler(MusicSheetEditor editor) {
         this.editor = editor;
     }

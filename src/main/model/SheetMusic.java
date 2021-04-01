@@ -1,24 +1,19 @@
 package model;
 
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SheetMusic {
 
-    private Notes notes;
-    private String letter;
     private String scoreName;
+    private String letter;
 
-    private List<Notes> sheet;
+    private final List<Notes> sheet;
 
-    private Image img;
 
     // EFFECTS: Constructs a music sheet
     public SheetMusic(String title) {
-        super();
         this.scoreName = title;
         this.sheet = new ArrayList<>();
     }
@@ -28,9 +23,8 @@ public class SheetMusic {
      * EFFECTS: Add note to music sheet.
      */
     public Boolean addNote(Notes note) {
-        this.notes = note;
-        this.letter = notes.getNoteName();
-        return sheet.add(note);
+        letter = note.getNoteName();
+        return sheet.add(new Notes(letter));
     }
 
     /* MODIFIES: this
@@ -73,9 +67,10 @@ public class SheetMusic {
         this.scoreName = name;
     }
 
-
-
-
+    // getter
+    public String getSheetMusicName() {
+        return scoreName;
+    }
 
 
 }

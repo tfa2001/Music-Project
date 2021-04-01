@@ -2,38 +2,20 @@
     "notes": [
         {
             "width": 40,
-            "x-position": 253,
-            "y-position": 85,
-            "height": 25
-        },
-        {
-            "width": 40,
-            "x-position": 420,
-            "y-position": 129,
-            "height": 25
-        },
-        {
-            "width": 40,
-            "x-position": 566,
+            "x-position": 207,
             "y-position": 81,
             "height": 25
         },
         {
             "width": 40,
-            "x-position": 248,
-            "y-position": 161,
+            "x-position": 422,
+            "y-position": 99,
             "height": 25
         },
         {
             "width": 40,
-            "x-position": 1137,
-            "y-position": 133,
-            "height": 25
-        },
-        {
-            "width": 40,
-            "x-position": 1150,
-            "y-position": 71,
+            "x-position": 303,
+            "y-position": 143,
             "height": 25
         }
     ],

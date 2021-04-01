@@ -1,7 +1,5 @@
 package ui.drawing;
 
-
-import com.sun.javafx.geom.Shape;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -77,6 +75,7 @@ public class NoteShape implements Writable {
     }
 
     @Override
+    // EFFECTS: returns this as JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("x-position", x1);

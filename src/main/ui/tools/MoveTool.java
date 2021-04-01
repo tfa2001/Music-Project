@@ -15,6 +15,7 @@ public class MoveTool extends Tool {
     private NoteShape noteToMove;
     private Point initial;
 
+    // EFFECTS: creates a button that allows user to move NoteShapes in SheetMusic
     public MoveTool(MusicSheetEditor editor, JComponent parent) {
         super(editor, parent);
         noteToMove = null;
@@ -59,7 +60,7 @@ public class MoveTool extends Tool {
     }
 
     // MODIFIES: this
-    // EFFECTS:  compute the change in the x and y position of the mouse, and move the shape
+    // EFFECTS:  compute the change in the x and y position of the mouse, and move the note
     @Override
     public void mouseDraggedOnNote(MouseEvent e) {
         if (noteToMove != null) {
