@@ -85,5 +85,6 @@ class SheetMusicTest {
         assertTrue(score.addNote(note2));
         assertTrue(score.addNote(note1));
         assertEquals("Sheet 1 is saved!", score.saveMusicSheet("Sheet 1"));
+        assertEquals("Sheet 1", score.getSheetMusicName());
     }
 }
